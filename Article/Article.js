@@ -85,16 +85,28 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+
+  {
+    title: 'What Lolem family records will you find?',
+    date: 'Jan 1st, 2020',
+    firstParagraph: `There are 19 census records available for the last name Lolem. Like a window into their day-to-day life, Lolem census records can tell you where and how your ancestors worked, their level of education, veteran status, and more.`,
+
+    secondParagraph: `There are 3 immigration records available for the last name Lolem. Passenger lists are your ticket to knowing when your ancestors arrived in the USA, and how they made the journey - from the ship name to ports of arrival and departure. `,
+
+    thirdParagraph: `There are 1 military records available for the last name Lolem. For the veterans among your Lolem ancestors, military collections provide insights into where and when they served, and even physical descriptions.`
   }
 ];
 
 /* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
+
 
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
 
     {three separate paragraph elements}
+
 
     <span class='expandButton'></span>
   </div>
@@ -111,3 +123,45 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+const articleMaker = document.querySelector('.articles')
+function makeArticles(dataObj){
+  const article = document.createElement('div')
+  const articlesH2 = document.createElement('h2')
+  const articlesP = document.createElement('p') 
+  const articlesPara1 = document.createElement('p')
+  const articlesPara2 = document.createElement('p')
+  const articlesPara3 = document.createElement('p')
+  const articlesButton = document.createElement('span')  
+
+
+article.appendChild(articlesH2)
+article.appendChild(articlesP)
+article.appendChild(articlesPara1)
+article.appendChild(articlesPara2)
+article.appendChild(articlesPara3)
+article.appendChild(articlesButton)
+
+
+article.classList.add('article')
+articlesP.classList.add('date')
+articlesButton.classList.add('expandButton')
+
+
+
+articlesH2.textContent = dataObj.title
+articlesP.textContent = dataObj.date
+articlesButton.textContent = 'expand'
+articlesPara1.textContent = dataObj.firstParagraph
+articlesPara2.textContent = dataObj.secondParagraph
+articlesPara3.textContent = dataObj.thirdParagraph
+
+
+articlesButton.addEventListener('click', event =>{ 
+  article.classList.toggle('article-open')
+})
+return article
+}
+for (let i = 0; i < data.length; i++){
+  const article = makeArticles(data[i])
+  articleMaker.appendChild(article)
+}
